@@ -1,59 +1,41 @@
 ﻿#include <iostream>
-#include <cmath>
+
 using namespace std;
 
-void sieve(int n)
+int find(int array[],int start,int end,int key)
 {
-	int* array = new int[n + 1];
+	if (start > end)
+	{
+		cout << "키를 찾을 수 없음" << endl;
+		return 0;
+	}
 
-    for (int i = 0; i < n; i++)
-        array[i] = i + 1;
-
-    array[0] = 0; 
-
-    for (int i = 1; i < n; i++)
-    {
-        if (array[i] != 0 && array[i] <= (int)sqrt(n))
-        {
-            int prime = array[i];
-            for (int j = prime * prime - 1; j < n; j += prime)
-            {
-                array[j] = 0; 
-            }
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (array[i] != 0)
-            cout << array[i] << " ";
-    }
-    cout << endl;
-
-	delete[] array;
+	int pivot = (start + end) / 2;
+	if (array[pivot] == key)
+	{
+		cout << key << endl;
+		return key;
+	}
+	else if(key < array[pivot])
+	{
+		int Left_v = find(array, start, pivot - 1, key);
+	}
+	else
+	{
+		int Right_v = find(array, pivot + 1, end, key);
+	}
+	
+	return 0;
 }
 int main()
 {
-#pragma region 에라토스테네스의 체
-	int j = 0;
-	for (int i = 2; i <= 50; i++)
-	{
-		for (j = 2; j < i; j++)
-		{
-			if (i % j == 0 )
-			{
-				break;
-			}
-		}
+#pragma region 이분 탐색
+	// 탐색 범위를 반으로 나누어 찾는 값을 포함하는 범위를 좁혀나가는 방식으로 동작하는 알고리즘
+	int array[] = { 6,10,13,22,57 };
+	int size = sizeof(array) / 4 - 1;
+	find(array, 0, size, 22);
 
-		if (i == j)
-		{
-			//cout << i << endl;
-		}
-	
-	}
 
-	sieve(16);
 #pragma endregion
 
 
