@@ -4,86 +4,49 @@
 #include <algorithm>
 using namespace std;
 
+void merge_sort(int list, int start, int end)
+{
+	int mid = (start + end) / 2;
+
+	if (start == end)
+	{
+		return;
+	}
+	else
+	{
+		merge_sort(list, start, mid);
+		merge_sort(list, mid + 1, end);
+
+	}
+
+
+}
+
+void combine(int list, int mid, int end)
+{
+
+}
 
 int main()
 {
-#pragma region 계수 정렬
-	// 데이터의 값을 비교하지 않고 각 원소에 데이터가 몇 개 있는지
-	// 개수를 세어 저장한 다음 정렬하는 알고리즘
+#pragma region 병합 정렬
+	// 하나의 리스트를 두 개의 균일한 크기로 분할하고 분할된
+	// 부분 리스트를 정렬한 다음, 두 개의 정렬된 부분 리스트를
+	// 합하여 전체가 정렬된 리스트가 되게 하는 방법
 
-	int array[] = {1,3,2,2,4,5,1,2};
-	int len = sizeof(array) / sizeof(array[0]);
-	//vector<int> count(6,0);
-	//vector<int> answer;
-	//for (int i = 0; i < len; i++)
-	//{
-	//	if (array[i] == 1)
-	//	{
-	//		count[array[i]]++;
-	//	}
-	//	else if (array[i] == 2)
-	//	{
-	//		count[array[i]]++;
-	//	}
-	//	else if (array[i] == 3)
-	//	{
-	//		count[array[i]]++;
-	//	}
-	//	else if (array[i] == 4)
-	//	{
-	//		count[array[i]]++;
-	//	}
-	//	else if (array[i] == 5)
-	//	{
-	//		count[array[i]]++;
-	//	}
-	//
-	//}
-	//
-	//for (int i = 1; i <= 5; i++)
-	//{
-	//	for (int j = 0; j < count[i]; j++)
-	//	{
-	//		answer.push_back(i);
-	//	}
-	//}
-	//for (auto& a : answer)
-	//{
-	//	cout << a << endl;
-	//}
+	// 1. 리스트의 길이가 0 또는 1이 되면 이미 정렬된 것으로 봄
+	// 2. 그렇지 않은 경우 
+	// 2-1. 정렬되지 않은 리스트를 절반으로 잘반으로 잘라 비슷한 크기의 두 부분 리스트로 나눔
+	// 2-2. 각 부분 리스트를 재귀적으로 병합 정렬을 이용하여 정렬
+	// 2-3. 두 부분 리스트를 다시 하나의 정렬된 리스트로 병합
 
-	unordered_map<int, int> count;
+	int list[] = { 3,5,2,7,4,1,8,6 };
+	int len = sizeof(list) / sizeof(list[0]);
 
-	for (int i = 0; i < len; i++)
-	{
-		count[array[i]]++;
-	}
 
-	vector<int> key;
-	for (auto& a : count)
-	{
-		key.push_back(a.first);
-	}
-
-	sort(key.begin(), key.end());
-
-	vector<int> answer;
-	for (int a : key)
-	{
-		for (int i = 0; i < count[a]; i++)
-		{
-			answer.push_back(a);
-		}
-		
-	}
-	
-	for (int a : answer)
-	{
-		cout << a << endl;
-	}
 #pragma endregion
 
 
-
+	return 0;
 }
 
