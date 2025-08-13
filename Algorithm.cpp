@@ -2,72 +2,80 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#define SIZE 8
 using namespace std;
 
-int fibonacci(int n)
+class Graph
 {
-	if (n < 1)
+private:
+	bool visited[SIZE];
+	vector<int> list[SIZE];
+public:
+	Graph() 
 	{
-		return 0;
+		for (int i = 0; i < SIZE; i++)
+		{
+			visited[i] = false;
+		}
 	}
-	else if (n < 3)
-	{
-		return 1;
-	}
-	else
-	{
-		return fibonacci(n - 1) + fibonacci(n - 2);
-	}
-}
 
-int fibonacci(int n,int list[])
-{
+	void Insert(int i, int j)
+	{
+		list[i].push_back(j);
+		list[j].push_back(i);
+	}
 	
-		if (n < 1)
+	void search(int start)
+	{
+		if (start >= SIZE)
 		{
-			return 0;
-		}
-		else if (n < 3)
-		{
-			return 1;
-		}
-
-		if (list[n] != 0)
-		{
-			return list[n];
+			return;
 		}
 		else
 		{
-			list[n] = fibonacci(n - 1,list) + fibonacci(n - 2,list);
-			return list[n];
-		}
-	
+			visited[start] = true;
+			cout << start << endl;
+			for (int i = 0; i < list[start].size(); i++)
+			{
+				int next = list[start][i];
+				if (!visited[next])
+				{
+					search(next);
+				}
+			}
 
-}
+		}
+
+
+	}
+};
+
 int main()
 {
-#pragma region 동적 계획법
-	// 특정 범위까지의 값을 구하기 위해 그것과 다른 범위 까지의 값을 이용하여
-	// 효율적으로 값을 구하는 알고리즘
+#pragma region 깊이 우선 탐색(Depth First Search)
+	// root 노드에서부터 다음 분기로 넘어가기 전에
+	// 해당 분기를 완벽하게 탐색하는 방법
 
-	// 겹치는 부분 문제 (Overlapping Subproblems)
-	// 동일한 작은 문제들이 반복하여 나타는 경우를 의미
-	
-	// 최적 부분 구조 (Optimal Substructure)
-	// 부분 문제의 최적 경로가 값을 사용하여 전체 문제의 최적의 
-	// 결과를 낼 수 있는 경우를 의미
+	// 깊이 우선 탐색은 스택을 활용 
 
-	// 메모이제이션 (Memoization)
-	// 프로그램이 동일한 계산을 반복해야 할 때, 이전에 계산한 값을
-	// 메모리에 저장함으로써, 동일한 계산을 반복 수행하는 작업을
-	// 제거하여 프로그램이 실행 속도를 향상시키는 방법
+	Graph graph;
 
-	//cout << fibonacci(50);
+	graph.Insert(1, 2);
+	graph.Insert(1, 3);
+
+	graph.Insert(2, 3);
+	graph.Insert(2, 4);
+	graph.Insert(2, 5);
+
+	graph.Insert(3, 6);
+	graph.Insert(3, 7);
+
+	graph.Insert(4, 5);
+	graph.Insert(6, 7);
+
+	graph.search(1);
 #pragma endregion
 
-	int list[100001] = { 0, };
-	cout << fibonacci(50, list);
 
-	return 0;
 }
 
