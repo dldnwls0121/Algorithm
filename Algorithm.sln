@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class15th(Depth First Searc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class16th(Breadth First Search)", "Class16th(Breadth First Search)\Class16th(Breadth First Search).vcxproj", "{1E454E9E-342B-4D04-B0E7-37A46EC7BA40}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class17th(BackTracking)", "Class17th(BackTracking)\Class17th(BackTracking).vcxproj", "{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -181,6 +183,14 @@ Global
 		{1E454E9E-342B-4D04-B0E7-37A46EC7BA40}.Release|x64.Build.0 = Release|x64
 		{1E454E9E-342B-4D04-B0E7-37A46EC7BA40}.Release|x86.ActiveCfg = Release|Win32
 		{1E454E9E-342B-4D04-B0E7-37A46EC7BA40}.Release|x86.Build.0 = Release|Win32
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Debug|x64.ActiveCfg = Debug|x64
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Debug|x64.Build.0 = Debug|x64
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Debug|x86.ActiveCfg = Debug|Win32
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Debug|x86.Build.0 = Debug|Win32
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Release|x64.ActiveCfg = Release|x64
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Release|x64.Build.0 = Release|x64
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Release|x86.ActiveCfg = Release|Win32
+		{6EFF6D8F-F1E3-4514-B926-B5C08517AB5B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
