@@ -11,89 +11,101 @@ class Maze
 private:
 	int x;
 	int y;
-	bool visited[SIZE][SIZE];
-	vector<vector<int>> map = { {1,1,1,1},{ 0,0,0,1 },{1,1,1,1},{1,0,0,1} };
+	vector<vector<bool>> visited;
+	vector<vector<int>> map;
 public:
-	Maze()
+	Maze(int x, int y) : x(x), y(y), visited(y, vector<bool>(x, false)), map(y,vector<int>(x,1))
 	{
-		for (int i = 0; i < SIZE; i++)
+		
+		for (int i = 0; i < y; i++)
 		{
-			for (int j = 0; j < SIZE; j++)
+			for (int j = 0; j < x; j++)
 			{
-				visited[i][j] = false;
+
+				if (i >= 1 && i < y - 2)
+				{
+					for (int k = 0; k < x - 1; k++)
+					{
+						map[i][k] = 0;
+					}
+					
+				}
+				if (i == y - 1)
+				{
+					for (int f = 1; f < x - 1; f++)
+					{
+						map[i][f] = 0;
+					}
+				}
 			}
 		}
 
 
 	}
 
-	bool arrive(int x, int y)
+	bool arrive(int a, int b)
 	{
-	
-	
-
-		if (visited[y][x])
+		if (a < 0 || b < 0 || a >= y || b >= x || map[a][b] == 0 || visited[a][b])
 		{
 			return false;
 		}
 
-		if (x == 3 && y == 3)
+		visited[a][b] = true;
+		
+
+		if (a == y-1 && b == x-1)
 		{
 			cout << "Yes" << endl;
 			return true;
 		}
 
-
-		if (map[y][x] < map[y - 1][x])
+		if (arrive(a - 1 ,b))
 		{
-			if (x < 0 || y < 0)
-			{
-				return false;
-			}
+			return true;
 		}
-		if (map[y][x] > map[y + 1][x])
+		if (arrive(a + 1, b))
 		{
-
+			return true;
 		}
-		if (map[y][x] > map[y][x - 1])
+		if (arrive(a, b - 1))
 		{
-
+			return true;
 		}
-		if (map[y][x] > map[y][x + 1])
+		if (arrive(a, b + 1))
 		{
-
-
-
+			return true;
 		}
-
-		else
-		{
-			cout << "No" << endl;
-			return false;
-		}
+		
+		
+		return false;
 	}
-
-	void showmap()
+	
+	void print()
 	{
-		for (int i = 0; i < SIZE; i++)
+		for (int i = 0; i < y; i++)
 		{
-			for (int j = 0; j < SIZE; j++)
+			for (int j = 0; j < x; j++)
 			{
 				cout << map[i][j];
 			}
 			cout << endl;
 		}
 	}
+
 };
 
 int main()
 {
 
-	Maze maze;
 
-	maze.showmap();
-	//maze.arrive(0, 0);
 
+	Maze maze(5, 5);
+	maze.print();
+	if (!maze.arrive(0, 0))
+	{
+		cout << "No" << endl;
+
+	}
 	return 0; 
 }
 
