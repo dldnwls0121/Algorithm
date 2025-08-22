@@ -3,100 +3,96 @@
 #include <unordered_map>
 #include <algorithm>
 #include <queue>
-
-#define SIZE 8
+#define SIZE 4
 using namespace std;
 
-class Graph
+class Maze
 {
 private:
-	queue<int> q;
-	vector<int> list[SIZE];
-	vector<int> degree;
+	int x;
+	int y;
+	bool visited[SIZE][SIZE];
+	vector<vector<int>> map = { {1,1,1,1},{ 0,0,0,1 },{1,1,1,1},{1,0,0,1} };
 public:
-	Graph()
+	Maze()
 	{
-		degree.resize(SIZE, 0);
-	}
-	void insert(int vertex, int edge)
-	{
-		list[vertex].push_back(edge);
-		degree[edge]++;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				visited[i][j] = false;
+			}
+		}
+
+
 	}
 
-	void deprint()
+	bool arrive(int x, int y)
 	{
-		for (int i = 1; i < degree.size(); i++)
+	
+	
+
+		if (visited[y][x])
 		{
-			cout << i <<" " << degree[i] << endl;
+			return false;
+		}
+
+		if (x == 3 && y == 3)
+		{
+			cout << "Yes" << endl;
+			return true;
+		}
+
+
+		if (map[y][x] < map[y - 1][x])
+		{
+			if (x < 0 || y < 0)
+			{
+				return false;
+			}
+		}
+		if (map[y][x] > map[y + 1][x])
+		{
+
+		}
+		if (map[y][x] > map[y][x - 1])
+		{
+
+		}
+		if (map[y][x] > map[y][x + 1])
+		{
+
+
+
+		}
+
+		else
+		{
+			cout << "No" << endl;
+			return false;
 		}
 	}
 
-	void sort(int start)
+	void showmap()
 	{
-		q.push(start);
-
-		while (!q.empty())
+		for (int i = 0; i < SIZE; i++)
 		{
-			int current = q.front();
-			q.pop();
-			cout << current << endl;
-
-			for (int i = 0; i < list[current].size(); i++)
+			for (int j = 0; j < SIZE; j++)
 			{
-				int next = list[current][i];
-				degree[next]--;
-				if (degree[next] == 0)
-				{
-					q.push(next);
-				}
-			
+				cout << map[i][j];
 			}
+			cout << endl;
 		}
 	}
 };
+
 int main()
 {
-#pragma region 위상 정렬
-	// 병합 그래프에 존재하는 각 정점들의 선행 순서를 지키며,
-	// 모든 정점을 차례대로 진행하는 알고리즘
 
-	// 사이클이 발생하는 경우 위상 정렬을 수행할 수 없음
+	Maze maze;
 
-	// DAG("Directed Acyclic Graph) : 사이클이 존재하지 않는 그래프 
-
-	// 시간 복잡도 : O(V + E)
-
-	// 위상 정렬하는 방법
-
-	// 1. 진입 차수가 0인 정점을 Queue에 삽입
-
-	// 2. Queue에서 원소를 꺼내 연결된 모든 간선을 제거
-
-	// 3. 간선 제거 이후에 진입 차수가 0이 된 정점을 Queue에 삽입
-
-	// 4. Queue가 비어있을 때까지 2번 ~ 3번 작업을 반복 수행
-
-	Graph graph;
-	
-	graph.insert(1, 2);
-	graph.insert(1, 5);
-
-	graph.insert(2, 3);
-	graph.insert(3, 4);
-
-	graph.insert(4, 6);
-
-	graph.insert(5, 6);
-	graph.insert(6, 7);
-
-	//graph.deprint();
-
-	graph.sort(1);
-
-#pragma endregion
-
-
+	maze.showmap();
+	//maze.arrive(0, 0);
 
 	return 0; 
 }
